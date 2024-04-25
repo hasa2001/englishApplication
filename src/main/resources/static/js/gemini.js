@@ -11,6 +11,7 @@ async function run() {
     if (!word) {
       alert("Please enter the word");
     }else {
+        b.hide();
         const
             prompt = "your task is give the meaning of that given word, create descripion about the word and you should give what kind of word is that.also create five meaningful sentences using that word. the word is \"" + word + "\""
 
@@ -24,11 +25,13 @@ async function run() {
        const  responseModal =document.getElementById("responseModal");
        const responseArea =document.getElementById("responseTextArea");
        const wordLabel =document.getElementById("wordLabel");
-       const modal2 =new bootstrap.Modal(responseModal);
-       modal2.show();
+       openModal2();
+       // const modal2 =new bootstrap.Modal(responseModal);
+       // modal2.show();
        wordLabel.value =word;
        responseArea.value =text;
           console.log(text);
+
 
     }
 

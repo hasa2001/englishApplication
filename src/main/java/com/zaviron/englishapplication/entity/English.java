@@ -1,12 +1,10 @@
 package com.zaviron.englishapplication.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "english_details")
 public class English {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +13,11 @@ public class English {
     private String word;
     @NotNull(message = "Description is required")
     private String description;
+
+    public English(String word, String description) {
+        this.word = word;
+        this.description = description;
+    }
 
     public English(int id, String word, String description) {
         this.id = id;
