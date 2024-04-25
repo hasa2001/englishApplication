@@ -1,7 +1,7 @@
 function openModal1() {
     // const modalToggle = document.getElementById('toggleMyModal'); myModal.show(modalToggle);
     var modal = document.getElementById("staticBackdrop");
-     b = new bootstrap.Modal(modal);
+    b = new bootstrap.Modal(modal);
     b.show();
     // alert("Hello");
 
@@ -9,11 +9,10 @@ function openModal1() {
 
 function openModal2() {
     // const modalToggle = document.getElementById('toggleMyModal'); myModal.show(modalToggle);
-   var modal = document.getElementById("responseModal");
+    var modal = document.getElementById("responseModal");
     k = new bootstrap.Modal(modal);
     k.show();
     // alert("Hello");
-
 
 
 }
@@ -29,9 +28,9 @@ function closeModal1() {
 
 function closeModal2() {
     // const modalToggle = document.getElementById('toggleMyModal'); myModal.show(modalToggle);
-      var modal = document.getElementById("responseModal");
-     k = new bootstrap.Modal(modal);
-      k.hide();
+    var modal = document.getElementById("responseModal");
+    k = new bootstrap.Modal(modal);
+    k.hide();
     // alert("Hello");
     console.log("close");
     // let myModal = new bootstrap.Modal(document.getElementById('responseModal'));
@@ -40,12 +39,31 @@ function closeModal2() {
 
 }
 
-function addedWordDescriptionModal(){
-    var modal =document.getElementById("addedWordModal");
-    c=new bootstrap.Modal(modal);
-    c.show();
+function addedWordDescriptionModal(wordId) {
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                const text =   JSON.parse(request.responseText);
+                const modal = document.getElementById("addedWordModal");
+                const label =document.getElementById("addedWordModalLabel");
+                const textArea =document.getElementById("addedWordDescriptionTextArea");
+                c = new bootstrap.Modal(modal);
+                c.show();
+                label.innerText =text.word;
+                textArea.value =text.description;
+
+            }
+        }
+    };
+    request.open("get", "http://localhost:8080/english/viewDescription?id=" + wordId, true);
+    request.send();
+
 }
 
+function updateWordDescription(wordId) {
+    alert(wordId);
+}
 
 function processResponse() {
     const wordLabel = document.getElementById("wordLabel").value;
@@ -65,7 +83,7 @@ function processResponse() {
                 if (request.status == 200) {
                     // let details = request.responseText;
                     // accordion.innerHTML =details;
-                 k.hide();
+                    k.hide();
 
                 }
             }

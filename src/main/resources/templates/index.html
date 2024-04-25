@@ -50,7 +50,7 @@
                 <div class="accordion-item" th:each="englishDetails:${english}">
                     <div class="row">
                         <!--    cards-->
-                        <div class="card mt-2 col-9 offset-1 justify-content-center" onclick="addedWordDescriptionModal()">
+                        <div class="card mt-2 col-9 offset-1 justify-content-center"  th:onclick="addedWordDescriptionModal('[[${englishDetails.id}]]')">
                             <div class="card-body" th:text="${englishDetails.word}">
 
                             </div>
@@ -136,7 +136,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="mb-3">
-                        <label id="addedWordLabel" class="form-label"></label>
+                        <label id="addedWordLabel"  class="form-label" ></label>
                         <textarea  style="height: 450px;" class="form-control" id="addedWordDescriptionTextArea" rows="3"></textarea>
                     </div>
                 </div>

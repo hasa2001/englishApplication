@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EnglishServiceImpl implements EnglishService{
 
@@ -23,5 +25,18 @@ public class EnglishServiceImpl implements EnglishService{
     @Override
     public void save(English english) {
         englishRepository.save(english);
+    }
+
+    @Override
+    public English findById(int id) {
+
+        Optional<English> result = englishRepository.findById(id);
+        English english;
+        if (result.isPresent()){
+            english=result.get();
+        }else {
+            throw new RuntimeException("Did not find english word id - " + id);
+        }
+        return english;
     }
 }
