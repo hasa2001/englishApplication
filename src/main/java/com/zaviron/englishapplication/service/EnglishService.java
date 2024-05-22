@@ -8,5 +8,6 @@ public interface EnglishService {
     List<English> findAll();
     void save(English english);
     English findById(int id);
+    void deleteById(int id);
 
 }

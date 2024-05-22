@@ -4,9 +4,7 @@ import com.zaviron.englishapplication.entity.English;
 import com.zaviron.englishapplication.service.EnglishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RestEnglishController {
@@ -22,5 +20,13 @@ public class RestEnglishController {
         model.addAttribute("english",english);
         return english;
 
+    }
+    @PostMapping("/english/update")
+    public English update(@RequestParam("id")int word,@RequestParam("text")String text, Model model){
+        English english = englishService.findById(word);
+        model.addAttribute("english",english);
+        english.setDescription(text);
+        englishService.save(english);
+        return english;
     }
 }

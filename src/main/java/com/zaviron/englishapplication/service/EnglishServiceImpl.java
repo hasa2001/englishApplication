@@ -39,4 +39,9 @@ public class EnglishServiceImpl implements EnglishService{
         }
         return english;
     }
+
+    @Override
+    public void deleteById(int id) {
+        englishRepository.deleteById(id);
+    }
 }

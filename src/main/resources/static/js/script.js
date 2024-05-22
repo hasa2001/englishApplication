@@ -39,31 +39,6 @@ function closeModal2() {
 
 }
 
-function addedWordDescriptionModal(wordId) {
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = function () {
-        if (request.readyState == 4) {
-            if (request.status == 200) {
-                const text =   JSON.parse(request.responseText);
-                const modal = document.getElementById("addedWordModal");
-                const label =document.getElementById("addedWordModalLabel");
-                const textArea =document.getElementById("addedWordDescriptionTextArea");
-                c = new bootstrap.Modal(modal);
-                c.show();
-                label.innerText =text.word;
-                textArea.value =text.description;
-
-            }
-        }
-    };
-    request.open("get", "http://localhost:8080/english/viewDescription?id=" + wordId, true);
-    request.send();
-
-}
-
-function updateWordDescription(wordId) {
-    alert(wordId);
-}
 
 function processResponse() {
     const wordLabel = document.getElementById("wordLabel").value;
@@ -92,3 +67,66 @@ function processResponse() {
         request.send(form);
     }
 }
+
+function addedWordDescriptionModal(wordId) {
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                const text = JSON.parse(request.responseText);
+                const modal = document.getElementById("addedWordModal");
+                const label = document.getElementById("addedWordModalLabel");
+                const textArea = document.getElementById("addedWordDescriptionTextArea");
+                const id = document.getElementById("wordId");
+                c = new bootstrap.Modal(modal);
+                c.show();
+                label.innerText = text.word;
+                textArea.value = text.description;
+                id.value = text.id;
+
+            }
+        }
+    };
+    request.open("get", "http://localhost:8080/english/viewDescription?id=" + wordId, true);
+    request.send();
+
+}
+
+function updateWordDescription() {
+    const wordId = parseInt(document.getElementById("wordId").value);
+    const textArea = document.getElementById("addedWordDescriptionTextArea").value;
+
+    let form = new FormData();
+    form.append("id", wordId);
+    form.append("text", textArea);
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                alert("Update Success");
+                const text = JSON.parse(request.responseText);
+                textArea.innerText = text.description;
+
+            }
+        }
+    }
+    request.open("post", "http://localhost:8080/english/update", true);
+    request.send(form);
+}
+
+function deleteWord() {
+    const wordId = parseInt(document.getElementById("wordId").value);
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                c.hide();
+                window.location.reload();
+            }
+        }
+    }
+    request.open("get", "http://localhost:8080/english/delete?id=" + wordId, true);
+    request.send();
+}
+

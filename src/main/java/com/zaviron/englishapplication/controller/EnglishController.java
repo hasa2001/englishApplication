@@ -35,4 +35,10 @@ public class EnglishController {
         return "redirect:/english/list";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") int id) {
+        englishService.deleteById(id);
+        return "redirect:/english/list";
+    }
+
 }

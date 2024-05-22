@@ -1,35 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Testing HTML</title>
+    <title>WordWizard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .navbar-custom {
+            background-color: #008080   ; /* Dark background color */
+        }
+        .navbar-brand img {
+            height: 40px; /* Adjust as needed */
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff !important; /* White text color */
+        }
+        .navbar-toggler-icon {
+            background-image: url('https://www.canva.com/design/DAGF9Xs0Gjc/DnSYKdDh3_85wMPX-fbjkA/view?utm_content=DAGF9Xs0Gjc&utm_campaign=designshare&utm_medium=link&utm_source=editor');
+        }
+    </style>
 </head>
 <body>
-
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-12 " style="background-color: black;">
-            <div class="row">
-                <div class="col-12 col-lg-6 col-md-12">
-                    <div class="row">
-                        <div class="col-12 text-primary text-warning logo">
-                            <a style="text-decoration: none;" href="index.php"> gwc computers </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="offset-lg-3 offset-md-0 col-md-6 col-lg-3 col-12 offset-0 text-white mt-lg-3 mt-md-3 ">
-
-                    <i class="bi bi-door-open-fill"></i><a class="fs-5 text-white" style="text-decoration: none; " href="userprofile.php"><?php echo $user["fname"] ." ".  $user["lname"];  ?>
-                </a> | <i class="bi bi-cart-fill fs-5" onclick=" goToCart();"></i>  | <i class="bi bi-heart-fill" onclick="goToWatchList();"></i>
-
-                    <i class="bi bi-door-open-fill"></i><label onclick="signin();" class="fs-5">login/register</label> |<i class="bi bi-cart-fill fs-5" ></i> | <i class="bi bi-heart-fill"></i>
-
-
-                </div>
-
+<header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white fs-4" href="#" style="text-decoration: none">
+                WordWizard
+<!--                <img th:src="@{/img/logo.png}" alt="Brand Logo">-->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+</header>
+
+<div class="container-fluid">
+
+
+    <div class="row">
+
+
+<!--        <div class="col-12 " style="background-color: black;">-->
+<!--            <div class="row">-->
+<!--                <div class="col-12 col-lg-6 col-md-12">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-12 text-primary text-warning logo">-->
+<!--                            <a style="text-decoration: none;" >WordWizard</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="offset-lg-3 offset-md-0 col-md-6 col-lg-3 col-12 offset-0 text-white mt-lg-3 mt-md-3 ">-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <!--create button for add new word-->
     <div class="row">
@@ -54,6 +94,7 @@
                             <div class="card-body" th:text="${englishDetails.word}">
 
                             </div>
+                            <span hidden="hidden" id="wordId" th:text="${englishDetails.id}"></span>
 
 
                         </div>
@@ -142,8 +183,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success">Success</button>
-                <button type="button" class="btn btn-outline-danger">Danger</button>
+                <button type="button" class="btn btn-outline-success" onclick="updateWordDescription()">Update</button>
+                <button onclick="deleteWord()"  type="button" class="btn btn-outline-danger">Delete</button>
             </div>
         </div>
     </div>
