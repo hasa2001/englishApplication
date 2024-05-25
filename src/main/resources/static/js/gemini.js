@@ -1,7 +1,7 @@
 import {GoogleGenerativeAI} from "@google/generative-ai";
 
 // Access your API key (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI("AIzaSyAIVPmLP1mbTBV1QovQN6gRizYQy_orDUI");
+const genAI = new GoogleGenerativeAI("API KEY");
 
 async function run() {
     // For text-only input, use the gemini-pro model
